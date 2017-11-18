@@ -1,0 +1,22 @@
+    Coin1,    Coin2,     Mean,  Std Dev,          -> roi (1 ay)
+     Liqui,     Gemini, 0.000628289, 0.001043567,
+     Liqui,   Poloniex, 0.000541641, 0.000920584,
+     Liqui,     Kraken, 0.000525322, 0.000775201,
+     Liqui,   Coinbase, 0.000519605, 0.000781031,
+     Liqui,    BitTrex, 0.000513904, 0.000664922,
+     Liqui,   Bitfinex, 0.000506049, 0.000869315,
+    Gemini,    BitTrex, 0.000358957, 0.000802175, -> 0,04
+    Gemini,   Poloniex, 0.000355688, 0.000895975, -> 0,03
+    Gemini,     Kraken, 0.000330790, 0.000688555, -> 0,02
+    Gemini,   Bitfinex, 0.000309503, 0.000703461,
+    Gemini,   Coinbase, 0.000289868, 0.000659824,
+    Kraken,    BitTrex, 0.000211017, 0.000425418, 
+   BitTrex,   Poloniex, 0.000209671, 0.000651854, -> 0,14
+  Coinbase,    BitTrex, 0.000194813, 0.000461186, -> 0,02
+  Bitfinex,    BitTrex, 0.000184507, 0.000531583,
+    Kraken,   Poloniex, 0.000184477, 0.000587970, -> 0,03
+  Coinbase,   Poloniex, 0.000163188, 0.000615010,
+    Kraken,   Bitfinex, 0.000150595, 0.000234915,
+    Kraken,   Coinbase, 0.000147579, 0.000266033,
+  Bitfinex,   Poloniex, 0.000142697, 0.000603792,
+  Coinbase,   Bitfinex, 0.000128122, 0.000281629,

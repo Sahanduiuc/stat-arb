@@ -1,0 +1,4 @@
+Coin1,    Coin2,     Mean,  Std Dev,
+Kraken,    BitTrex, 0.000136309, 0.000300063,
+BitTrex,   Poloniex, 0.000132952, 0.000446987,
+Kraken,   Poloniex, 0.000109589, 0.000403847,

@@ -36,11 +36,13 @@ pp = pprint.PrettyPrinter()
 #define time period
 start_date = str(args.start_date)
 end_date = str(args.end_date)
+#start_date="2017-01-01"
+#end_date="2017-11-01"
 
 # define a pair
 fsym = str(args.fsym).upper() #"BCH"
 tsym = str(args.tsym).upper() #"ETH"
-#fsym = "BCH"
+#fsym = "WAVES"
 #tsym = "ETH"
  
 #get all market data
@@ -140,6 +142,7 @@ for market in markets:
     df = fetchCryptoOHLC_byExchange(fsym, tsym, market)
     ts = df[(df.index > start_date) & (df.index <= end_date)]["close"]
     ts.name = market
+    print(ts)
 
     if ('cp' in globals()) or ('cp' in locals()):
         if(ts.size == days_between(start_date, end_date)):

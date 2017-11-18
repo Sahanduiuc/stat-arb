@@ -30,13 +30,13 @@ def fetchCryptoOHLC_byExchange(fsym, tsym, exchange):
     # a function fetches a crypto OHLC price-series for fsym/tsym and stores
     # it in a pandas DataFrame; uses specific Exchange as provided
     # src: https://www.cryptocompare.com/api/
- 
+
     cols = ['date', 'timestamp', 'open', 'high', 'low', 'close']
     lst = ['time', 'open', 'high', 'low', 'close']
- 
+
     timestamp_today = datetime.today().timestamp()
     curr_timestamp = timestamp_today
- 
+
     for j in range(2):
         df = pd.DataFrame(columns=cols)
         url = "https://min-api.cryptocompare.com/data/histoday?fsym=" + fsym + \
@@ -45,7 +45,7 @@ def fetchCryptoOHLC_byExchange(fsym, tsym, exchange):
         response = requests.get(url)
         soup = BeautifulSoup(response.content, "html.parser")
         dic = json.loads(soup.prettify())
- 
+
         for i in range(1, 2001):
             tmp = []
             for e in enumerate(lst):
@@ -61,18 +61,18 @@ def fetchCryptoOHLC_byExchange(fsym, tsym, exchange):
         df.index = pd.to_datetime(df.date)
         df.drop('date', axis=1, inplace=True)
         curr_timestamp = int(df.iloc[0][0])
- 
+
         if(j == 0):
             df0 = df.copy()
         else:
             data = pd.concat([df, df0], axis=0)
- 
+
     return data.astype(np.float64)
 
 #Statistical Arbitrage Trading Strategy
 market1 = str(args.market1)#"HitBTC"
 market2 = str(args.market2)#"BitTrex"
- 
+
 fsym = str(args.fsym).upper() #"BCH"
 tsym = str(args.tsym).upper() #"ETH"
 
@@ -82,14 +82,14 @@ end_date = str(args.end_date)
 
 df1 = fetchCryptoOHLC_byExchange(fsym, tsym, market1)
 df2 = fetchCryptoOHLC_byExchange(fsym, tsym, market2)
- 
+
 # trim
 df1 = df1[(df1.index > start_date) & (df1.index <= end_date)]
 df2 = df2[(df2.index > start_date) & (df2.index <= end_date)]
- 
+
 # checkpoint
 print(df1.close.shape[0], df2.close.shape[0])  # both sizes must be equal
- 
+
 # plotting
 plt.figure(figsize=(20,10))
 plt.plot(df1.close, '.-', label=market1)
@@ -104,11 +104,11 @@ plt.show()
 # Backtesting Stat Arb trading strategy for ETH/USD at Exmo and Kraken
 #  cryptocurrency exchanges
 # initial parameters
- 
+
 investment = 10000  # USD
 account1, account2 = investment/2, investment/2  # USD
 position = 0.5*(investment/2)  # USD
- 
+
 roi = []
 ac1 = [account1]
 ac2 = [account2]
@@ -116,10 +116,10 @@ money = []
 trade_pnl = []
 pnl_exch1 = []
 pnl_exch2 = []
- 
+
 trade = False
 n = df1.close.shape[0]  # number of data points
- 
+
 # running the backtest
 for i in range(n):
     p1 = float(df1.close.iloc[i])
@@ -139,7 +139,7 @@ for i in range(n):
             new_trade = False  # flag
         elif(asset1 == open_asset2):
             new_trade = True   # flag
- 
+
     elif(p2 > p1):
         asset1 = "LONG"
         asset2 = "SHORT"
@@ -155,13 +155,13 @@ for i in range(n):
             new_trade = False  # flag
         elif(asset1 == open_asset2):
             new_trade = True   # flag
- 
+
     if(i == 0):
         print(df1.close.iloc[i], df2.close.iloc[i], \
               asset1, asset2, trade, "----first trade info")
     else:
         if(new_trade):
- 
+
             # close current position
             if(open_asset1 == "SHORT"):
                 # PnL of both trades
@@ -202,7 +202,7 @@ for i in range(n):
                 trade = True
                 print("new trade opened", asset1, asset2, \
                       open_p1, open_p2)
- 
+
             # close current position
             if(open_asset1 == "LONG"):
                 # PnL of both trades
@@ -229,7 +229,7 @@ for i in range(n):
                 print("ROI = ", roi[-1])
                 print("trade closed\n")
                 trade = False
- 
+
                 # open a new trade
                 if(open_asset1 == "SHORT"):
                     open_p1 = p1
@@ -245,7 +245,7 @@ for i in range(n):
                 trade = True
                 print("new trade opened:", asset1, asset2, \
                       open_p1, open_p2)
- 
+
         else:
             print("   ",df1.close.iloc[i], df2.close.iloc[i], \
                   asset1, asset2)
