@@ -1,0 +1,7 @@
+    Coin1,    Coin2,     Mean,  Std Dev,
+      CCEX,   Poloniex, 1.852161527, 2.496447325,
+      CCEX,   Bitfinex, 1.851994991, 2.495282173,
+      CCEX,     Kraken, 1.820245028, 2.497272491,
+    Kraken,   Poloniex, 0.050249994, 0.106119171,
+    Kraken,   Bitfinex, 0.050083324, 0.106625013,
+  Poloniex,   Bitfinex, 0.006666664, 0.007371680,
